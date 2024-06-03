@@ -1,19 +1,21 @@
 {
-  "name": "Drag and Drop project",
+  "name": "drag-drop",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start":"lite-server --baseDir=dist",
+    "build": "tsc",
+    "start":"npm run build && lite-server --baseDir=dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "typescript": "^5.4.5"
+    "typescript": "^4.9.5"
   },
   "dependencies": {
+    "typescript": "^4.9.5",
     "lite-server": "^2.6.1"
   }
 }
