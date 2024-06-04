@@ -1,10 +1,7 @@
-export class Fields {
+import { Base } from "./Base.js";
+export class Fields extends Base {
     constructor() {
-        this._template = document.getElementById("fields");
-        this._hostElement = document.getElementById("app");
-        const templateContent = document.importNode(this._template.content, true);
-        this._form = templateContent.firstElementChild;
-        this._hostElement.insertAdjacentElement('afterbegin', this._form);
+        super("fields", "app", "form", true);
     }
 }
 //# sourceMappingURL=Fields.js.map

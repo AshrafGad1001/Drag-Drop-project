@@ -1,13 +1,17 @@
-export class projectList {
-    private _template: HTMLTemplateElement;
-    private _projectsContainer: HTMLDivElement;
-    private _hostElement: HTMLDivElement;
+import { Base } from "./Base.js"
+export class projectList extends Base<HTMLDivElement> {
 
-    constructor() {
-        this._template = document.getElementById("list")! as HTMLTemplateElement;
-        this._hostElement = document.getElementById("app")! as HTMLDivElement;
-        const _templateContent = document.importNode(this._template.content, true);
-        this._projectsContainer = _templateContent.firstElementChild! as HTMLDivElement;
-        this._hostElement.insertAdjacentElement("beforeend", this._projectsContainer);
+
+    constructor(private _status: "Initial" | "Active" | "Finished") {
+        super("project-list", "app", `${_status}-projects`, false)
+        this.renderProjectList();
+    }
+    private renderProjectList(): void {
+        const title = this.element.querySelector(".title")! as HTMLHeadingElement;
+        const list = this.element.querySelector("ul")! as HTMLUListElement;
+
+        list.classList.add(`${this._status}-list`);
+        title.textContent = `${this._status}-projects`;
     }
 }
+

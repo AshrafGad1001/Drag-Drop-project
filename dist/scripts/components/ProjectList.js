@@ -1,10 +1,15 @@
-export class projectList {
-    constructor() {
-        this._template = document.getElementById("list");
-        this._hostElement = document.getElementById("app");
-        const _templateContent = document.importNode(this._template.content, true);
-        this._projectsContainer = _templateContent.firstElementChild;
-        this._hostElement.insertAdjacentElement("beforeend", this._projectsContainer);
+import { Base } from "./Base.js";
+export class projectList extends Base {
+    constructor(_status) {
+        super("project-list", "app", `${_status}-projects`, false);
+        this._status = _status;
+        this.renderProjectList();
+    }
+    renderProjectList() {
+        const title = this.element.querySelector(".title");
+        const list = this.element.querySelector("ul");
+        list.classList.add(`${this._status}-list`);
+        title.textContent = `${this._status}-projects`;
     }
 }
 //# sourceMappingURL=ProjectList.js.map
