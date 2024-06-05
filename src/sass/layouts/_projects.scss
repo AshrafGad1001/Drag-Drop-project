@@ -1,0 +1,22 @@
+@use "../vars/colors" as *;
+@use "../vars/radius" as *;
+
+.projects {
+    text-align: center;
+    max-width: 300px;
+    min-width: 230px;
+    margin: 10px;
+
+    .title-header {
+        background-color: $bg-main-c;
+        border-radius: $small-r;
+        padding: 10px;
+
+        .title {
+            font-weight: 700;
+            font-size: 20px;
+            text-transform: capitalize;
+        }
+    }
+
+}

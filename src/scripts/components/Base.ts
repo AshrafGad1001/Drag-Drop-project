@@ -1,22 +1,28 @@
 export class Base<T extends HTMLElement>{
-    private _template: HTMLTemplateElement;
-    private _hostElement: HTMLDivElement;
+    private _template!: HTMLTemplateElement;
+    private _hostElement!: HTMLDivElement;
     public element: T;
     constructor(private _templateId: string,
         private _hostId: string,
         private _elementId: string,
         private _positionElementStart: boolean
     ) {
-        //Assign Template Element
-        this._template = document.getElementById(this._templateId)! as HTMLTemplateElement;
-        this._hostElement = document.getElementById(this._hostId)! as HTMLDivElement;
+        const [template, _] = this._targetElement(this._templateId, this._hostId);
+
         // Import Template Content
-        const _templateContent = document.importNode(this._template.content, true);
+        const _templateContent = document.importNode(template.content, true);
         this.element = _templateContent.firstElementChild! as T;
         if (this._elementId) {
             this.element.id = this._elementId;
             this._insertElement(this._positionElementStart);
         }
+    }
+
+    private _targetElement(TemplateId: string, hostId: string):
+        [HTMLTemplateElement, HTMLDivElement] {
+        this._template = document.getElementById(TemplateId)! as HTMLTemplateElement;
+        this._hostElement = document.getElementById(hostId)! as HTMLDivElement;
+        return [this._template, this._hostElement];
     }
 
     private _insertElement(positionStart: boolean) {
