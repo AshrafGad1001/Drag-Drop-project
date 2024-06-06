@@ -1,49 +1,40 @@
-import { Base } from "./Base.js"
+import { Base } from "./Base.js";
 import { AssignValidateInputs, handleValidationErrors } from "utils/Validation/ValidationHelpers.js";
-export class Fields extends Base<HTMLFormElement> {
-
+export class Fields extends Base {
     constructor() {
         super("fields", "app", "form", true);
         this._addProject();
     }
-
-    private _addProject(): void {
+    _addProject() {
         this.element.addEventListener("submit", this._handelAddProject.bind(this));
     }
-    private _handelAddProject(e: Event): void {
+    _handelAddProject(e) {
         e.preventDefault();
         const [titleInput, descInput] = this._targetInputs();
         const [titleValue, descValue] = this._getInputValues(titleInput, descInput);
-
         if (this._validationInputValues(titleValue, descValue)) {
             console.log("OOOOOOOOOOOK");
         }
     }
-
-    private _targetInputs(): HTMLInputElement[] {
-        const titleInput = document.getElementById("title")! as HTMLInputElement;
-        const descInput = document.getElementById("desc")! as HTMLInputElement;
+    _targetInputs() {
+        const titleInput = document.getElementById("title");
+        const descInput = document.getElementById("desc");
         return [titleInput, descInput];
     }
-    private _getInputValues(titleInput: HTMLInputElement, descInput: HTMLInputElement): string[] {
+    _getInputValues(titleInput, descInput) {
         const titleValue = titleInput.value;
         const descValue = descInput.value;
         return [titleValue, descValue];
     }
-
-    private _validationInputValues(titleValue: string, descValue: string) {
+    _validationInputValues(titleValue, descValue) {
         const [titleInputRule, descInputRule] = AssignValidateInputs(titleValue, descValue);
         const titleErrorMsg = handleValidationErrors(titleInputRule);
         const descErrorMsg = handleValidationErrors(descInputRule);
-
         if (titleErrorMsg.length)
             alert(titleErrorMsg);
         else if (descErrorMsg)
             alert(descErrorMsg);
-
-
         return true;
     }
 }
-
-
+//# sourceMappingURL=Fields.js.map
